@@ -18,3 +18,16 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=128)
+    description = models.TextField(blank=True)
+    # Foreign key will only allow for a one-to-one relationship
+    posts = models.ManyToManyField(Post, blank=True, related_name='categories')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Categories' 
