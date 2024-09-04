@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from blogging.models import Post, Category
 import datetime
-from django.utils.timezone import utc
+from django.utils import timezone
 
 
 class FrontEndTestCase(TestCase):
@@ -10,7 +10,7 @@ class FrontEndTestCase(TestCase):
     fixtures = ['blogging_test_fixture.json', ]
 
     def setUp(self):
-        self.now = datetime.datetime.utcnow().replace(tzinfo=utc)
+        self.now = datetime.datetime.utcnow().replace(tzinfo=timezone.timezone.utc)
         self.timedelta = datetime.timedelta(15)
         author = User.objects.get(pk=1)
         for count in range(1, 11):
