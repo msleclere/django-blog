@@ -2,14 +2,13 @@ from django.contrib import admin
 from django.db import models
 from blogging.models import Post, Category
 
-admin.site.register(Category)
 
-
-# admin.site.register(Post)
-
-class CategoryInLine(admin.StackedInline):
-    model = Category
+class CategroyAdmin(admin.ModelAdmin):
     exclude = ('posts',)
+
+
+class CategoryInLine(admin.TabularInline):
+    model = Category.posts.through
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -17,3 +16,4 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Category, CategroyAdmin)
