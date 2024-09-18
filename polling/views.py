@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import Http404
 from polling.models import Poll
+from django.views.generic.list import ListView
 
 
-def list_view(request):
-    context = {'polls': Poll.objects.all()}
-    return render(request, 'polling/lists.html', context)
+class PollListView(ListView):
+    model = Poll
+    template_name = 'polling/lists.html'
 
 
 def detail_view(request, poll_id):
